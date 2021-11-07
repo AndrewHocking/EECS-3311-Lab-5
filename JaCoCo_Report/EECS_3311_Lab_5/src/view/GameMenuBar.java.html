@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>GameMenuBar.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (7-Nov-2021 3:51:48 PM)</a> &gt; <a href="../../index.html" class="el_group">EECS 3311 Lab 5</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">view</a> &gt; <span class="el_source">GameMenuBar.java</span></div><h1>GameMenuBar.java</h1><pre class="source lang-java linenums">package view;
+
+import javax.swing.*;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+
+public class GameMenuBar extends JMenuBar {
+
+	public GameMenuBar(ActionListener menubarListener) {
+<span class="fc" id="L10">		super();</span>
+<span class="fc" id="L11">		JMenu gameMenu = new JMenu(&quot;Game&quot;);</span>
+<span class="fc" id="L12">		gameMenu.add(createMenuItem(&quot;New game&quot;, &quot;NEW&quot;, KeyEvent.VK_N, menubarListener));</span>
+<span class="fc" id="L13">		gameMenu.addSeparator();</span>
+<span class="fc" id="L14">		gameMenu.add(createMenuItem(&quot;Exit&quot;, &quot;EXIT&quot;, KeyEvent.VK_Q, menubarListener));</span>
+<span class="fc" id="L15">		super.add(gameMenu);</span>
+<span class="fc" id="L16">		JMenu controlMenu = new JMenu(&quot;Control&quot;);</span>
+<span class="fc" id="L17">		controlMenu.add(createMenuItem(&quot;Pause&quot;, &quot;PAUSE&quot;, KeyEvent.VK_P, menubarListener));</span>
+<span class="fc" id="L18">		controlMenu.add(createMenuItem(&quot;Resume&quot;, &quot;RESUME&quot;, KeyEvent.VK_R, menubarListener));</span>
+<span class="fc" id="L19">		super.add(controlMenu);</span>
+<span class="fc" id="L20">	}</span>
+
+	private JMenuItem createMenuItem(String text, String actionCommand, int accelerator, ActionListener listener) {
+<span class="fc" id="L23">		JMenuItem menuItem = new JMenuItem(text);</span>
+<span class="fc" id="L24">		menuItem.setActionCommand(actionCommand);</span>
+<span class="fc" id="L25">		menuItem.addActionListener(listener);</span>
+<span class="fc" id="L26">		menuItem.setAccelerator(KeyStroke.getKeyStroke(accelerator, 0));</span>
+<span class="fc" id="L27">		return menuItem;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span>Merged (7-Nov-2021 3:51:48 PM)</div></body></html>

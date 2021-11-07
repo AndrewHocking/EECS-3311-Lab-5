@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>PlayerCollection.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (7-Nov-2021 3:51:48 PM)</a> &gt; <a href="../../index.html" class="el_group">EECS 3311 Lab 5</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">model.players</a> &gt; <span class="el_source">PlayerCollection.java</span></div><h1>PlayerCollection.java</h1><pre class="source lang-java linenums">package model.players;
+
+import java.util.AbstractCollection;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+/**
+ * A Collection for storing GamePlayer objects.
+ * @author Andrew Hocking
+ */
+public class PlayerCollection extends AbstractCollection&lt;GamePlayer&gt; {
+	
+	private GamePlayer[] data;
+	private int size;
+	
+<span class="fc" id="L17">	public PlayerCollection() {</span>
+<span class="fc" id="L18">		data = new GamePlayer[2];</span>
+<span class="fc" id="L19">		size = 0;</span>
+<span class="fc" id="L20">	}</span>
+	
+	/**
+	 * Gets the specified GamePlayer in the collection, if it is there.
+	 * @param player
+	 * @return The player if it is present, or null otherwise.
+	 */
+	public GamePlayer get(GamePlayer player) {
+<span class="fc bfc" id="L28" title="All 2 branches covered.">		for(GamePlayer p : this) {</span>
+<span class="pc bpc" id="L29" title="1 of 2 branches missed.">			if (p.equals(player)) {</span>
+<span class="nc" id="L30">				return p;</span>
+			}
+		}
+<span class="fc" id="L33">		return null;</span>
+	}
+
+	/**
+	 * Gets the GamePlayer with the specified name in the collection, if it is there.
+	 * @param playerName
+	 * @return The player if it is present, or null otherwise.
+	 */
+	public GamePlayer get(String playerName) {
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">		for(GamePlayer p : this) {</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">			if (p.getPlayerName().equals(playerName)) {</span>
+<span class="fc" id="L44">				return p;</span>
+			}
+		}
+<span class="nc" id="L47">		return null;</span>
+	}
+	
+	/**
+	 * Gets the GamePlayer at the specified index.
+	 * @param index
+	 * @return The player at the index.
+	 */
+	public GamePlayer get(int index) {
+<span class="fc bfc" id="L56" title="All 4 branches covered.">		if (0 &lt;= index &amp;&amp; index &lt; size) {</span>
+<span class="fc" id="L57">			return data[index];</span>
+		}
+<span class="fc" id="L59">		throw new NoSuchElementException();</span>
+	}
+
+	/**
+	 * Sorts the elements by their natural ordering.
+	 */
+	public void sort() {
+<span class="fc" id="L66">		Arrays.sort(data);</span>
+<span class="fc" id="L67">	}</span>
+
+	@Override
+	public int size() {
+<span class="fc" id="L71">		return size;</span>
+	}
+	
+	@Override
+	public Iterator&lt;GamePlayer&gt; iterator() {
+<span class="fc" id="L76">		return new PlayerIterator(this);</span>
+	}
+
+	@Override
+	public boolean add(GamePlayer e) {
+		try {
+<span class="fc bfc" id="L82" title="All 2 branches covered.">			if (data.length == size) {</span>
+<span class="fc" id="L83">				data = Arrays.copyOf(data, size * 2);</span>
+			}
+<span class="fc" id="L85">			data[size] = e;</span>
+<span class="fc" id="L86">			size++;</span>
+<span class="fc" id="L87">			return true;</span>
+<span class="nc" id="L88">		} catch (Exception ex) {</span>
+<span class="nc" id="L89">			return false;</span>
+		}
+	}
+	
+	/**
+	 * Finds the index of the specified GamePlayer in the collection.
+	 * @param player
+	 * @return The index of the player if it is present, or -1 otherwise.
+	 */
+	public int indexOf(GamePlayer player) {
+<span class="fc" id="L99">		int index = Arrays.binarySearch(data, player);</span>
+<span class="pc bpc" id="L100" title="1 of 2 branches missed.">		if (index &lt; 0) {</span>
+<span class="nc" id="L101">			return -1;</span>
+		} else {
+<span class="fc" id="L103">			return index;</span>
+		}
+	}
+	
+	/**
+	 * Removes the GamePlayer at the specified index.
+	 * @param index
+	 * @return True if the player as removed, false otherwise.
+	 */
+	public boolean remove(int index) {
+<span class="pc bpc" id="L113" title="1 of 4 branches missed.">		if (index &gt;= 0 &amp;&amp; index &lt; size) {</span>
+<span class="fc bfc" id="L114" title="All 2 branches covered.">			for (int i = index; i &lt; size - 1; i++) {</span>
+<span class="fc" id="L115">				data[i] = data[i+1];</span>
+			}
+<span class="fc" id="L117">			data[size - 1] = null;</span>
+<span class="fc" id="L118">			size--;</span>
+<span class="fc" id="L119">			return true;</span>
+		}
+<span class="fc" id="L121">		return false;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span>Merged (7-Nov-2021 3:51:48 PM)</div></body></html>

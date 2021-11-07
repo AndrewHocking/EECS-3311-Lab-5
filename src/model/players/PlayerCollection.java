@@ -53,11 +53,10 @@ public class PlayerCollection extends AbstractCollection<GamePlayer> {
 	 * @return The player at the index.
 	 */
 	public GamePlayer get(int index) {
-		try {
+		if (0 <= index && index < size) {
 			return data[index];
-		} catch (ArrayIndexOutOfBoundsException e) {
-			throw new NoSuchElementException();
 		}
+		throw new NoSuchElementException();
 	}
 
 	/**
