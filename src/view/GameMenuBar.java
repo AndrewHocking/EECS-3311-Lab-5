@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
+/**
+ * The menu bar at the top of the screen in the MiniSoccerApp application.
+ */
 public class GameMenuBar extends JMenuBar {
 
 	public GameMenuBar(ActionListener menubarListener) {
@@ -19,6 +22,14 @@ public class GameMenuBar extends JMenuBar {
 		super.add(controlMenu);
 	}
 
+	/**
+	 * Creates a new menu item for the menu bar.
+	 * @param text - The menu item's name.
+	 * @param actionCommand - The name of the item's Action Command.
+	 * @param accelerator - The keyboard shortcut for the menu item.
+	 * @param listener - The ActionListener to listen for interaction with the menu item.
+	 * @return The new menu item.
+	 */
 	private JMenuItem createMenuItem(String text, String actionCommand, int accelerator, ActionListener listener) {
 		JMenuItem menuItem = new JMenuItem(text);
 		menuItem.setActionCommand(actionCommand);

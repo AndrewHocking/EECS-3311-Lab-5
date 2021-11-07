@@ -11,6 +11,11 @@ public class PlayerFactory {
 	private static final String STRIKER = "striker";
 	private static final String GOALKEEPER = "goalkeeper";
 
+	/**
+	 * Returns a new instance of a GamePlayer subclass, given the name of the type to be created.
+	 * @param playerType The type of player to be created
+	 * @return A new player of the specified type.
+	 */
 	public GamePlayer getPlayer(String playerType) {
 		switch(playerType.toLowerCase().trim()) {
 		case STRIKER:

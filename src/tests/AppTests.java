@@ -31,6 +31,10 @@ import model.players.PlayerFactory;
 import view.GameMenuBar;
 import view.GamePanel;
 
+/**
+ * A series of JUnit tests for the MiniSoccerApp application.
+ * @author Andrew Hocking
+ */
 class AppTests {
 
 	private static Robot bot;

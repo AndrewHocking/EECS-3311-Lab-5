@@ -6,8 +6,15 @@ import view.GamePanel;
 
 import javax.swing.*;
 
+/**
+ * A starter class for the MiniSoccerApp application.
+ */
 public class MiniSoccerApp {
 
+	/**
+	 * Starts the application.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		JFrame gameFrame = new JFrame("Mini Soccer");
 		GamePanel gamePanel = new GamePanel();

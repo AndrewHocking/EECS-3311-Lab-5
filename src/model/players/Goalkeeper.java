@@ -5,6 +5,10 @@ import model.SoccerBall;
 import java.awt.*;
 import java.util.Random;
 
+/**
+ * The player in the MiniSoccerApp application that acts as the "goalie", and
+ * tries to prevent the ball from going into the gate.
+ */
 public class Goalkeeper extends GamePlayer {
 
 	private int movementStep;
@@ -47,6 +51,9 @@ public class Goalkeeper extends GamePlayer {
 		SoccerBall.getSoccerBall().moveBall(-20, -5.0, -0.05);
 	}
 
+	/**
+	 * Moves the goalkeeper in a random, Gaussian fashion around the net.
+	 */
 	public void moveRandomly() {
 		Random random = new Random();
 		double playerCurrentXPosition = (double) getPlayerPosition().x + 15;

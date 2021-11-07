@@ -4,6 +4,10 @@ import model.SoccerBall;
 
 import java.awt.*;
 
+/**
+ * The player in the MiniSoccerApp application that is controller by the user,
+ * who is trying to get the ball into the gate.
+ */
 public class Striker extends GamePlayer {
 	public Striker(String name, Color color) {
 		super(name, color);
