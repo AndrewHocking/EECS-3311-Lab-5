@@ -8,6 +8,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.awt.AWTException;
+import java.awt.Point;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.io.ByteArrayOutputStream;
@@ -20,19 +21,16 @@ import org.junit.Assert;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
-import org.junit.jupiter.api.Order;
 
 import controller.GameListener;
 import controller.MenubarListener;
+import model.SoccerBall;
 import model.players.GamePlayer;
 import model.players.PlayerCollection;
 import model.players.PlayerFactory;
 import view.GameMenuBar;
 import view.GamePanel;
 
-@TestMethodOrder(OrderAnnotation.class)
 class AppTests {
 	
 	private static Robot bot;
@@ -92,12 +90,17 @@ class AppTests {
 	}
 
 	/**
-	 * Score a goal and check that the goal count increases.
+	 * Score a goal and check that the goal count increases, the game pauses, and the ball and
+	 * the players go back to their initial positions.
 	 * @throws InterruptedException
 	 */
-	@Order(1)
 	@Test
 	void scoreGoalTest() throws InterruptedException {
+		// Get the initial positions of the ball and the players.
+		Point initialStrikerPosition = gamePanel.getGame().getGamePlayers().get("Striker").getPlayerPosition();
+		Point initialGoalkeeperPosition = gamePanel.getGame().getGamePlayers().get("Goalkeeper").getPlayerPosition();
+		Point initialBallPosition = SoccerBall.getSoccerBall().getPosition();
+		
 		// Shoot the ball, but not far enough to reach the goal.
 		bot.keyPress(KeyEvent.VK_SPACE);
 		bot.keyRelease(KeyEvent.VK_SPACE);
@@ -110,8 +113,13 @@ class AppTests {
 		bot.keyPress(KeyEvent.VK_SPACE);
 		bot.keyRelease(KeyEvent.VK_SPACE);
 		bot.delay(3000);
+		
+		assertTrue(gamePanel.getGame().isPaused());
 		assertEquals(1, gamePanel.getGame().getGoal().intValue());
 		assertEquals(1, gamePanel.getGame().getActivePlayer().getPlayerStatistics().intValue());
+		assertEquals(initialStrikerPosition, gamePanel.getGame().getGamePlayers().get("Striker").getPlayerPosition());
+		assertEquals(initialGoalkeeperPosition, gamePanel.getGame().getGamePlayers().get("Goalkeeper").getPlayerPosition());
+		assertEquals(initialBallPosition, SoccerBall.getSoccerBall().getPosition());
 	}
 	
 	/**
@@ -219,17 +227,32 @@ class AppTests {
 	}
 	
 	/**
-	 * Start a new game and check that the timer and both players' statistics have been reset.
+	 * Start a new game and check that the timer and both players' statistics have been reset, as well
+	 * as the ball's and the players' positions.
 	 */
 	@Test
 	void newGameTest() {
+		// Get the initial positions of the ball and the players.
+		Point initialStrikerPosition = gamePanel.getGame().getGamePlayers().get("Striker").getPlayerPosition();
+		Point initialGoalkeeperPosition = gamePanel.getGame().getGamePlayers().get("Goalkeeper").getPlayerPosition();
+		Point initialBallPosition = SoccerBall.getSoccerBall().getPosition();
+		
 		gamePanel.getGame().setGoal(3);
 		assertEquals(3, gamePanel.getGame().getGoal().intValue());
 		for (GamePlayer player : gamePanel.getGame().getGamePlayers()) {
 			player.setPlayerStatistics(3);
 			assertEquals(3, player.getPlayerStatistics().intValue());
 		}
-		bot.delay(11000);
+		bot.keyPress(KeyEvent.VK_SPACE);
+		bot.keyRelease(KeyEvent.VK_SPACE);
+		bot.delay(1000);
+		holdKeyAndRelease(KeyEvent.VK_LEFT, 4000);
+		holdKeyAndRelease(KeyEvent.VK_UP, 2000);
+		assertNotEquals(initialStrikerPosition, gamePanel.getGame().getGamePlayers().get("Striker").getPlayerPosition());
+		assertNotEquals(initialGoalkeeperPosition, gamePanel.getGame().getGamePlayers().get("Goalkeeper").getPlayerPosition());
+		assertNotEquals(initialBallPosition, SoccerBall.getSoccerBall().getPosition());
+
+		bot.delay(4000);
 		assertTrue(gamePanel.getGame().getTimeRemaining().intValue() <= 50);
 		
 		bot.keyPress(KeyEvent.VK_N);
@@ -240,6 +263,9 @@ class AppTests {
 		for (GamePlayer player : gamePanel.getGame().getGamePlayers()) {
 			assertEquals(0, player.getPlayerStatistics().intValue());
 		}
+		assertEquals(initialStrikerPosition, gamePanel.getGame().getGamePlayers().get("Striker").getPlayerPosition());
+		assertEquals(initialGoalkeeperPosition, gamePanel.getGame().getGamePlayers().get("Goalkeeper").getPlayerPosition());
+		assertEquals(initialBallPosition, SoccerBall.getSoccerBall().getPosition());
 	}
 	
 	/**
