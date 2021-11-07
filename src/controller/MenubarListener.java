@@ -37,7 +37,7 @@ public class MenubarListener implements ActionListener {
 			case "RESUME":
 				if (soccerGame.isPaused() && !soccerGame.isOver()) {
 					soccerGame.setPaused(false);
-				} else if (!soccerGame.isPaused()) {
+				} else if (!soccerGame.isPaused() && !soccerGame.isOver()) {
 					System.out.println("game is already running!");
 				} else if (soccerGame.isOver()) {
 					System.out.println("game is over, please start a new game.");
