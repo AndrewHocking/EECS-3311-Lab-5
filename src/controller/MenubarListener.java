@@ -6,6 +6,9 @@ import view.GamePanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * A listener for the MiniSoccerApp's menu bar.
+ */
 public class MenubarListener implements ActionListener {
 
 	private final GamePanel gamePanel;

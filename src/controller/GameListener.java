@@ -6,6 +6,9 @@ import view.GamePanel;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * A listener for the MiniSoccerApp's main GamePanel.
+ */
 public class GameListener implements KeyListener {
 
 	private final GamePanel gamePanel;

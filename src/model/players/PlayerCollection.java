@@ -21,7 +21,7 @@ public class PlayerCollection extends AbstractCollection<GamePlayer> {
 	
 	/**
 	 * Gets the specified GamePlayer in the collection, if it is there.
-	 * @param player
+	 * @param player - The player to find.
 	 * @return The player if it is present, or null otherwise.
 	 */
 	public GamePlayer get(GamePlayer player) {
@@ -35,7 +35,7 @@ public class PlayerCollection extends AbstractCollection<GamePlayer> {
 
 	/**
 	 * Gets the GamePlayer with the specified name in the collection, if it is there.
-	 * @param playerName
+	 * @param playerName - The player to find.
 	 * @return The player if it is present, or null otherwise.
 	 */
 	public GamePlayer get(String playerName) {
@@ -49,7 +49,7 @@ public class PlayerCollection extends AbstractCollection<GamePlayer> {
 	
 	/**
 	 * Gets the GamePlayer at the specified index.
-	 * @param index
+	 * @param index - The index of the player in the collection.
 	 * @return The player at the index.
 	 */
 	public GamePlayer get(int index) {
@@ -92,7 +92,7 @@ public class PlayerCollection extends AbstractCollection<GamePlayer> {
 	
 	/**
 	 * Finds the index of the specified GamePlayer in the collection.
-	 * @param player
+	 * @param player - The player whose index to find.
 	 * @return The index of the player if it is present, or -1 otherwise.
 	 */
 	public int indexOf(GamePlayer player) {
@@ -106,7 +106,7 @@ public class PlayerCollection extends AbstractCollection<GamePlayer> {
 	
 	/**
 	 * Removes the GamePlayer at the specified index.
-	 * @param index
+	 * @param index - The index of the player in the collection to be removed.
 	 * @return True if the player as removed, false otherwise.
 	 */
 	public boolean remove(int index) {

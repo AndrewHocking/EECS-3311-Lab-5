@@ -31,6 +31,10 @@ import model.players.PlayerFactory;
 import view.GameMenuBar;
 import view.GamePanel;
 
+/**
+ * A series of JUnit tests for the MiniSoccerApp application.
+ * @author Andrew Hocking
+ */
 class AppTests {
 
 	private static Robot bot;
@@ -80,8 +84,8 @@ class AppTests {
 	 * Helper method to emulate pressing and holding a key on the keyboard by doing
 	 * several repeated key presses.
 	 * 
-	 * @param keyCode
-	 * @param duration
+	 * @param keyCode - The key to press.
+	 * @param duration - How long to press the key, in milliseconds.
 	 */
 	private static void holdKeyAndRelease(int keyCode, long duration) {
 		bot.setAutoDelay(50);
